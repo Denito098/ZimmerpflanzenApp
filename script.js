@@ -97,14 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function tick() {
     if (!plant.alive) return;
 
-    plant.water = clamp(plant.water - (4 + Math.random() * 3));
-    plant.nutrients = clamp(plant.nutrients - (2 + Math.random() * 2));
+    plant.water = clamp(plant.water - (2 + Math.random() * 2));
+    plant.nutrients = clamp(plant.nutrients - (1 + Math.random() * 1.2));
 
     if (plant.water < 30) {
-      plant.health = clamp(plant.health - 6);
+      plant.health = clamp(plant.health - 4);
       addLogEntry('⚠️ Deine Pflanze seufzt nach Wasser.');
     } else if (plant.water > 90) {
-      plant.health = clamp(plant.health - 4);
+      plant.health = clamp(plant.health - 3);
       addLogEntry('⚠️ Zu viel Wasser staut sich im Topf.');
     } else {
       plant.health = clamp(plant.health + 1, 0, 100);
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addLogEntry(`🌿 Die Pflanze wächst weiter (${Math.round(plant.growth)}%).`);
       }
     } else {
-      plant.growth = clamp(plant.growth - 0.5, 0, 100);
+      plant.growth = clamp(plant.growth - 0.25, 0, 100);
     }
 
     triggerRandomEvents();

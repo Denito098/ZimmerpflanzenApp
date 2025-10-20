@@ -1,0 +1,7 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; font-family: Arial, Helvetica, sans-serif; background: #f4f7ee; color:#103; }
+main { max-width: 640px; margin: 6vh auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 6px 18px rgba(16,48,24,0.08); }
+h1 { margin-bottom: 0.5rem; }
+#status{margin-bottom:1rem;color:#275}
+button{padding:0.6rem 1rem;border-radius:6px;border:1px solid #1a612a;background:#2ea04a;color:white;cursor:pointer}
+button:active{transform:translateY(1px)}

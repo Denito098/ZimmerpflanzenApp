@@ -3,15 +3,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Zimmerpflanze</title>
+  <title>Zimmerpflanzen-Gärtner</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1>Zimmerpflanze</h1>
-    <p id="status">Status: wartend...</p>
-    <button id="testBtn">Testen</button>
+  <main class="app">
+    <header class="app__header">
+      <h1>Zimmerpflanzen-Gärtner</h1>
+      <p class="app__subtitle">Halte deine Pflanze glücklich, gesund und lasse sie wachsen!</p>
+    </header>
+
+    <section class="plant-status" aria-live="polite">
+      <div class="plant-status__header">
+        <h2>Aktueller Zustand</h2>
+        <p id="status">Deine Pflanze fühlt sich wohl und wartet auf deine Fürsorge.</p>
+      </div>
+
+      <div class="plant-status__stats">
+        <article class="stat">
+          <h3>Wasser</h3>
+          <div class="stat__bar" role="progressbar" aria-labelledby="waterLabel" aria-valuemin="0" aria-valuemax="100">
+            <div id="waterLevel" class="stat__fill"></div>
+          </div>
+          <p id="waterLabel" class="stat__label">70 / 100</p>
+        </article>
+        <article class="stat">
+          <h3>Nährstoffe</h3>
+          <div class="stat__bar" role="progressbar" aria-labelledby="nutrientLabel" aria-valuemin="0" aria-valuemax="100">
+            <div id="nutrientLevel" class="stat__fill"></div>
+          </div>
+          <p id="nutrientLabel" class="stat__label">60 / 100</p>
+        </article>
+        <article class="stat">
+          <h3>Gesundheit</h3>
+          <div class="stat__bar" role="progressbar" aria-labelledby="healthLabel" aria-valuemin="0" aria-valuemax="100">
+            <div id="healthLevel" class="stat__fill"></div>
+          </div>
+          <p id="healthLabel" class="stat__label">100 / 100</p>
+        </article>
+        <article class="stat">
+          <h3>Wachstum</h3>
+          <div class="stat__bar" role="progressbar" aria-labelledby="growthLabel" aria-valuemin="0" aria-valuemax="100">
+            <div id="growthLevel" class="stat__fill"></div>
+          </div>
+          <p id="growthLabel" class="stat__label">0 / 100</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="actions" aria-label="Pflegeaktionen">
+      <h2>Aktionen</h2>
+      <div class="actions__grid">
+        <button type="button" class="action" data-action="water">Gießen</button>
+        <button type="button" class="action" data-action="fertilize">Düngen</button>
+        <button type="button" class="action" data-action="sun">Sonnenbad</button>
+        <button type="button" class="action" data-action="prune">Schneiden</button>
+        <button type="button" class="action" data-action="mist">Besprühen</button>
+        <button type="button" class="action" data-action="inspect">Blätter prüfen</button>
+      </div>
+    </section>
+
+    <section class="log" aria-live="polite">
+      <h2>Gartenjournal</h2>
+      <ul id="logList" class="log__list">
+        <li>🌱 Eine kleine Sprössling-Pflanze zieht bei dir ein.</li>
+      </ul>
+    </section>
   </main>
+
+  <footer class="footer">
+    <p>Tipps: Lass die Wasser- und Nährstoffwerte ausgeglichen. Hohe Gesundheit fördert das Wachstum!</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

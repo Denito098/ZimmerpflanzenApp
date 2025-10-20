@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const healthLabel = document.getElementById('healthLabel');
   const growthLabel = document.getElementById('growthLabel');
   const actionButtons = document.querySelectorAll('.action');
+  const plantScene = document.getElementById('plantScene');
+  const plantVisual = document.getElementById('plantVisual');
+  const plantMouth = document.getElementById('plantMouth');
 
   const plant = {
     water: 70,
@@ -80,6 +83,71 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBar(growthFill, growthLabel, plant.growth);
     plant.stage = describeStage();
     statusEl.textContent = statusMessage();
+    updatePlantVisual();
+  }
+
+  function updatePlantVisual() {
+    if (!plantScene || !plantVisual || !plantMouth) return;
+
+    const growthRatio = plant.growth / 100;
+    const waterRatio = plant.water / 100;
+    const healthRatio = plant.health / 100;
+
+    const stemHeight = 110 + growthRatio * 150;
+    const droop = 26 - waterRatio * 24;
+    const midDroop = droop * 0.45;
+    const hue = 90 + healthRatio * 45;
+    const lightness = 30 + waterRatio * 16;
+    const stemLightness = Math.min(lightness + 6, 60);
+    const budScale = Math.max(0, Math.min(1, (growthRatio - 0.4) / 0.5));
+    const glowOpacity = 0.18 + Math.max(0, (healthRatio + growthRatio) / 2) * 0.4;
+    const glowScale = 0.9 + growthRatio * 0.45;
+    const leafHighlight = Math.min(lightness + 18, 78);
+    const leafShadow = Math.max(lightness - 18, 20);
+    const stemHighlight = Math.min(stemLightness + 10, 70);
+    const blossom = Math.min(1, Math.max(0, (growthRatio - 0.3) / 0.6));
+    const petalScale = 0.25 + blossom * 0.75;
+    const flowerHue = hue + 56;
+    const flowerLightness = 66 + blossom * 18;
+    const flowerShadowLightness = Math.max(flowerLightness - 18, 30);
+    const petalOpacity = Math.min(1, 0.2 + petalScale * 0.8);
+    const budOpacity = Math.min(1, 0.25 + budScale * 0.75);
+    const cheer = Math.min(1, (plant.health + plant.water) / 200);
+    const cheekOpacity = 0.3 + cheer * 0.45;
+    const lean = (plant.water - 50) / 14;
+
+    plantVisual.style.setProperty('--stem-height', `${stemHeight}px`);
+    plantVisual.style.setProperty('--leaf-droop', `${droop}deg`);
+    plantVisual.style.setProperty('--leaf-droop-mid', `${midDroop.toFixed(2)}deg`);
+    plantVisual.style.setProperty('--leaf-color', `hsl(${hue}, 58%, ${lightness}%)`);
+    plantVisual.style.setProperty('--stem-color', `hsl(${hue - 12}, 52%, ${stemLightness}%)`);
+    plantVisual.style.setProperty('--bud-scale', budScale.toFixed(2));
+    plantVisual.style.setProperty('--leaf-highlight', `hsl(${hue}, 65%, ${leafHighlight}%)`);
+    plantVisual.style.setProperty('--leaf-shadow', `hsl(${hue - 16}, 52%, ${leafShadow}%)`);
+    plantVisual.style.setProperty('--stem-highlight', `hsl(${hue - 10}, 55%, ${stemHighlight}%)`);
+    plantVisual.style.setProperty('--flower-color', `hsl(${flowerHue}, 75%, ${flowerLightness}%)`);
+    plantVisual.style.setProperty('--flower-shadow', `hsl(${flowerHue - 18}, 72%, ${flowerShadowLightness}%)`);
+    plantVisual.style.setProperty('--petal-scale', petalScale.toFixed(2));
+    plantVisual.style.setProperty('--petal-opacity', petalOpacity.toFixed(2));
+    plantVisual.style.setProperty('--bud-opacity', budOpacity.toFixed(2));
+    plantVisual.style.setProperty('--cheek-opacity', cheekOpacity.toFixed(2));
+    plantVisual.style.setProperty('--plant-tilt', `${lean.toFixed(2)}deg`);
+    plantVisual.style.setProperty('--face-tilt', `${(-lean / 1.8).toFixed(2)}deg`);
+    plantScene.style.setProperty('--glow-opacity', glowOpacity.toFixed(2));
+    plantScene.style.setProperty('--glow-scale', glowScale.toFixed(2));
+
+    plantVisual.classList.remove('plant-visual__plant--happy', 'plant-visual__plant--sad', 'plant-visual__plant--alert');
+    plantMouth.classList.remove('plant-visual__mouth--neutral', 'plant-visual__mouth--sad');
+
+    if (!plant.alive || plant.health < 25 || plant.water < 25) {
+      plantVisual.classList.add('plant-visual__plant--sad');
+      plantMouth.classList.add('plant-visual__mouth--sad');
+    } else if (plant.health > 72 && plant.water > 45 && plant.water < 85 && !plant.pests) {
+      plantVisual.classList.add('plant-visual__plant--happy');
+    } else {
+      plantVisual.classList.add('plant-visual__plant--alert');
+      plantMouth.classList.add('plant-visual__mouth--neutral');
+    }
   }
 
   function triggerRandomEvents() {

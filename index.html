@@ -14,9 +14,41 @@
     </header>
 
     <section class="plant-status" aria-live="polite">
-      <div class="plant-status__header">
-        <h2>Aktueller Zustand</h2>
-        <p id="status">Deine Pflanze fühlt sich wohl und wartet auf deine Fürsorge.</p>
+      <div class="plant-status__overview">
+        <div class="plant-visual" id="plantScene" role="img" aria-label="Comic-Pflanze, die auf ihren Zustand reagiert">
+          <div class="plant-visual__glow"></div>
+          <div class="plant-visual__plant" id="plantVisual">
+            <div class="plant-visual__leaf plant-visual__leaf--base-left"></div>
+            <div class="plant-visual__leaf plant-visual__leaf--base-right"></div>
+            <div class="plant-visual__leaf plant-visual__leaf--mid-left"></div>
+            <div class="plant-visual__leaf plant-visual__leaf--mid-right"></div>
+            <div class="plant-visual__stem">
+              <span class="plant-visual__stem-highlight"></span>
+            </div>
+            <div class="plant-visual__crown">
+              <span class="plant-visual__petal plant-visual__petal--left"></span>
+              <span class="plant-visual__petal plant-visual__petal--center"></span>
+              <span class="plant-visual__petal plant-visual__petal--right"></span>
+              <div class="plant-visual__bud"></div>
+            </div>
+            <div class="plant-visual__face" id="plantFace">
+              <span class="plant-visual__eye plant-visual__eye--left"></span>
+              <span class="plant-visual__eye plant-visual__eye--right"></span>
+              <span class="plant-visual__cheek plant-visual__cheek--left"></span>
+              <span class="plant-visual__cheek plant-visual__cheek--right"></span>
+              <span class="plant-visual__mouth" id="plantMouth"></span>
+            </div>
+          </div>
+          <div class="plant-visual__pot">
+            <div class="plant-visual__pot-lip"></div>
+            <div class="plant-visual__pot-body"></div>
+            <div class="plant-visual__pot-shadow"></div>
+          </div>
+        </div>
+        <div class="plant-status__header">
+          <h2>Aktueller Zustand</h2>
+          <p id="status">Deine Pflanze fühlt sich wohl und wartet auf deine Fürsorge.</p>
+        </div>
       </div>
 
       <div class="plant-status__stats">
